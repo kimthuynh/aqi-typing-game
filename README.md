@@ -20,18 +20,6 @@ npm i -g vercel      # first time only
 vercel dev           # http://localhost:3000
 ```
 
-`.env.local` must contain:
-
-```
-ANTHROPIC_API_KEY=...
-AWS_ACCESS_KEY_ID=...
-AWS_SECRET_ACCESS_KEY=...
-AWS_REGION=us-west-1
-S3_BUCKET_NAME=amzn-s3-aqi-typing
-AQI_CSV_URL=https://raw.githubusercontent.com/kimthuynh/air_quality_analysis/main/app/data/Monthly_aqi_by_state.csv
-MOCK_MODE=true       # flip to false once you're ready to hit real Claude + S3
-```
-
 With `MOCK_MODE=true`, `/api/get-story` returns the New York reference text
 (with the state name swapped in) — lets you test the full frontend/typing loop
 without spending API credits or writing to S3.
