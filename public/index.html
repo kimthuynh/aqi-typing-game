@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AQI Typing Adventure — Skye the Pigeon</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="sky-background" aria-hidden="true">
+    <div class="cloud cloud-a"></div>
+    <div class="cloud cloud-b"></div>
+    <div class="cloud cloud-c"></div>
+  </div>
+
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 40 C 16 28, 26 22, 32 22 C 40 22, 48 28, 58 40" />
+          <path d="M22 22 C 26 16, 30 14, 32 14" />
+          <circle cx="32" cy="14" r="1.4" fill="currentColor" stroke="none" />
+        </svg>
+      </span>
+      <span class="brand-title">AQI Typing Adventure</span>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn is-active" data-tab="play" role="tab" aria-selected="true">Play</button>
+      <button class="tab-btn" data-tab="scores" role="tab" aria-selected="false">Scores</button>
+      <button class="tab-btn" data-tab="map" role="tab" aria-selected="false">Map</button>
+      <button class="tab-btn" data-tab="about" role="tab" aria-selected="false">About</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ TAB 1: PLAY ============ -->
+    <section class="tab-panel is-active" data-tab-panel="play">
+      <!-- LANDING -->
+      <div class="scene scene-landing is-active" data-scene="landing">
+        <div class="scene-bg" style="background-image: url('/images/scene1.png')"></div>
+        <div class="scene-overlay"></div>
+        <div class="scene-content">
+          <div class="landing-card card">
+            <h1 class="landing-title">Type through the sky with Skye</h1>
+            <p class="landing-sub">A five-scene story about your state's air, generated once and cached forever.</p>
+            <div class="landing-controls">
+              <label for="state-select" class="visually-hidden">Choose a state</label>
+              <select id="state-select" class="state-select">
+                <option value="">Choose your state…</option>
+              </select>
+              <button id="btn-random" class="btn btn-ghost" type="button">Surprise me</button>
+            </div>
+            <button id="btn-start" class="btn btn-primary btn-lg" type="button" disabled>Start</button>
+            <p class="landing-hint" id="landing-hint" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCENE 1 (intro) -->
+      <div class="scene scene-intro" data-scene="scene1">
+        <div class="scene-bg" style="background-image: url('/images/scene1.png')"></div>
+        <div class="scene-overlay"></div>
+        <div class="scene-content">
+          <div class="narrate-card card">
+            <p class="scene-tag">Scene 1 · Meet Skye</p>
+            <p class="narrate-body">
+              Hey there — I'm Skye, and I fly the skies over <strong data-slot="state-name">your state</strong> every day.
+              I've been watching the air for the past three years, and I've got a story to tell you.
+              Ready to type your way through it?
+            </p>
+            <button class="btn btn-primary" data-action="next-scene">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCENES 2/3/4 (typing) -->
+      <div class="scene scene-typing" data-scene="scene2">
+        <div class="scene-bg" style="background-image: url('/images/scene2.png')"></div>
+        <div class="scene-overlay"></div>
+        <div class="scene-content typing-layout">
+          <aside class="kpi-panel card">
+            <div class="kpi-location">
+              <span class="kpi-location-label">Skye's current location</span>
+              <span class="kpi-location-value" data-slot="state-name">—</span>
+            </div>
+            <div class="kpi-divider" aria-hidden="true"></div>
+            <div class="kpi-row">
+              <span class="kpi-label">Avg PM2.5 (2025)</span>
+              <span class="kpi-value" data-kpi="pm25">—</span>
+            </div>
+            <div class="kpi-row">
+              <span class="kpi-label">Avg Ozone (2025)</span>
+              <span class="kpi-value" data-kpi="ozone">—</span>
+            </div>
+            <div class="kpi-row">
+              <span class="kpi-label">Unhealthy days (2025)</span>
+              <span class="kpi-value" data-kpi="unhealthy">—</span>
+            </div>
+          </aside>
+          <div class="typing-main">
+            <div class="hud-stack">
+              <div class="typing-hud">
+                <div class="hud-item"><span class="hud-label">WPM</span><span class="hud-value" data-hud="wpm">0</span></div>
+                <div class="hud-item"><span class="hud-label">Accuracy</span><span class="hud-value" data-hud="accuracy">100%</span></div>
+                <div class="hud-item"><span class="hud-label">Time</span><span class="hud-value" data-hud="timer">0.0s</span></div>
+                <button class="hud-btn" data-action="pause" type="button" aria-label="Pause typing" title="Pause">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="typing-card card">
+              <p class="scene-tag">Scene 2 · The trend</p>
+              <div class="typing-text" data-typing="scene2" tabindex="0" aria-label="Typing text"></div>
+              <div class="typing-progress"><div class="typing-progress-bar" data-progress="scene2"></div></div>
+              <div class="typing-actions">
+                <button class="btn btn-ghost" data-action="submit-early" type="button">Submit score now</button>
+                <button class="btn btn-primary" data-action="next-scene" disabled>Next scene</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene scene-typing" data-scene="scene3">
+        <div class="scene-bg" style="background-image: url('/images/scene3.png')"></div>
+        <div class="scene-overlay"></div>
+        <div class="scene-content typing-layout">
+          <aside class="kpi-panel card">
+            <div class="kpi-location">
+              <span class="kpi-location-label">Skye's current location</span>
+              <span class="kpi-location-value" data-slot="state-name">—</span>
+            </div>
+            <div class="kpi-divider" aria-hidden="true"></div>
+            <div class="kpi-row">
+              <span class="kpi-label">Avg PM2.5 (2025)</span>
+              <span class="kpi-value" data-kpi="pm25">—</span>
+            </div>
+            <div class="kpi-row">
+              <span class="kpi-label">Avg Ozone (2025)</span>
+              <span class="kpi-value" data-kpi="ozone">—</span>
+            </div>
+            <div class="kpi-row">
+              <span class="kpi-label">Unhealthy days (2025)</span>
+              <span class="kpi-value" data-kpi="unhealthy">—</span>
+            </div>
+          </aside>
+          <div class="typing-main">
+            <div class="hud-stack">
+              <div class="typing-hud">
+                <div class="hud-item"><span class="hud-label">WPM</span><span class="hud-value" data-hud="wpm">0</span></div>
+                <div class="hud-item"><span class="hud-label">Accuracy</span><span class="hud-value" data-hud="accuracy">100%</span></div>
+                <div class="hud-item"><span class="hud-label">Time</span><span class="hud-value" data-hud="timer">0.0s</span></div>
+                <button class="hud-btn" data-action="pause" type="button" aria-label="Pause typing" title="Pause">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="typing-card card">
+              <p class="scene-tag">Scene 3 · Best and worst month</p>
+              <div class="typing-text" data-typing="scene3" tabindex="0" aria-label="Typing text"></div>
+              <div class="typing-progress"><div class="typing-progress-bar" data-progress="scene3"></div></div>
+              <div class="typing-actions">
+                <button class="btn btn-ghost" data-action="submit-early" type="button">Submit score now</button>
+                <button class="btn btn-primary" data-action="next-scene" disabled>Next scene</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene scene-typing" data-scene="scene4">
+        <div class="scene-bg" style="background-image: url('/images/scene4.png')"></div>
+        <div class="scene-overlay"></div>
+        <div class="scene-content typing-layout">
+          <aside class="kpi-panel card">
+            <div class="kpi-location">
+              <span class="kpi-location-label">Skye's current location</span>
+              <span class="kpi-location-value" data-slot="state-name">—</span>
+            </div>
+            <div class="kpi-divider" aria-hidden="true"></div>
+            <div class="kpi-row">
+              <span class="kpi-label">Avg PM2.5 (2025)</span>
+              <span class="kpi-value" data-kpi="pm25">—</span>
+            </div>
+            <div class="kpi-row">
+              <span class="kpi-label">Avg Ozone (2025)</span>
+              <span class="kpi-value" data-kpi="ozone">—</span>
+            </div>
+            <div class="kpi-row">
+              <span class="kpi-label">Unhealthy days (2025)</span>
+              <span class="kpi-value" data-kpi="unhealthy">—</span>
+            </div>
+          </aside>
+          <div class="typing-main">
+            <div class="hud-stack">
+              <div class="typing-hud">
+                <div class="hud-item"><span class="hud-label">WPM</span><span class="hud-value" data-hud="wpm">0</span></div>
+                <div class="hud-item"><span class="hud-label">Accuracy</span><span class="hud-value" data-hud="accuracy">100%</span></div>
+                <div class="hud-item"><span class="hud-label">Time</span><span class="hud-value" data-hud="timer">0.0s</span></div>
+                <button class="hud-btn" data-action="pause" type="button" aria-label="Pause typing" title="Pause">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="typing-card card">
+              <p class="scene-tag">Scene 4 · How your state compares</p>
+              <div class="typing-text" data-typing="scene4" tabindex="0" aria-label="Typing text"></div>
+              <div class="typing-progress"><div class="typing-progress-bar" data-progress="scene4"></div></div>
+              <div class="typing-actions">
+                <button class="btn btn-ghost" data-action="submit-early" type="button">Submit score now</button>
+                <button class="btn btn-primary" data-action="submit-scores" disabled>Finish</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAUSE OVERLAY (shared, activated by pause button) -->
+      <div class="pause-overlay" data-pause-overlay hidden>
+        <div class="pause-card card">
+          <div class="pause-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+          </div>
+          <h2 class="pause-title">Paused</h2>
+          <p class="pause-sub">Take a breath. Skye's holding your spot.</p>
+          <div class="pause-actions">
+            <button class="btn btn-primary" data-action="resume" type="button">Resume typing</button>
+            <button class="btn btn-ghost" data-action="finish-early" type="button">See my score now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCENE 5 (score) -->
+      <div class="scene scene-score" data-scene="scene5">
+        <div class="scene-bg score-bg"></div>
+        <div class="scene-overlay"></div>
+        <div class="scene-content">
+          <div class="score-card card">
+            <p class="scene-tag">Scene 5 · Your flight log</p>
+            <h2 class="score-title">Nice flying, pilot.</h2>
+            <div class="stars" data-stars aria-label="Star rating"></div>
+            <div class="score-summary">
+              <div class="score-summary-item score-summary-primary">
+                <span class="hud-label">Score</span>
+                <span class="score-value" data-final="score">0</span>
+              </div>
+              <div class="score-summary-item">
+                <span class="hud-label">Total WPM</span>
+                <span class="score-value" data-final="wpm">0</span>
+              </div>
+              <div class="score-summary-item">
+                <span class="hud-label">Accuracy</span>
+                <span class="score-value" data-final="accuracy">0%</span>
+              </div>
+              <div class="score-summary-item">
+                <span class="hud-label">Time</span>
+                <span class="score-value" data-final="time">0.0s</span>
+              </div>
+            </div>
+            <table class="score-breakdown">
+              <thead><tr><th>Scene</th><th>Score</th><th>WPM</th><th>Accuracy</th><th>Time</th></tr></thead>
+              <tbody data-breakdown></tbody>
+            </table>
+            <div class="save-row">
+              <input id="save-username" type="text" class="input" placeholder="Your name (a-z, 0-9)" maxlength="20" />
+              <button id="btn-save" class="btn btn-primary" type="button">Save score</button>
+            </div>
+            <p class="save-msg" data-save-msg aria-live="polite"></p>
+            <div class="score-actions">
+              <button class="btn btn-ghost" id="btn-download-json" type="button">Download JSON</button>
+              <button class="btn btn-ghost" id="btn-download-csv" type="button">Download CSV</button>
+              <button class="btn btn-ghost" id="btn-play-again" type="button">Play again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 2: SCORES ============ -->
+    <section class="tab-panel" data-tab-panel="scores">
+      <div class="page">
+        <h2 class="page-title">Scoreboard</h2>
+        <p class="page-sub">Scores expire 30 days after they're saved. Fly often to keep your name up here.</p>
+        <div class="search-row">
+          <input id="score-search" type="search" class="input" placeholder="Search by username…" />
+        </div>
+        <div class="table-wrap">
+          <table class="scores-table">
+            <thead>
+              <tr>
+                <th data-sort="username">Username</th>
+                <th data-sort="state">State</th>
+                <th data-sort="wpm">WPM</th>
+                <th data-sort="accuracy">Accuracy</th>
+                <th data-sort="stars">Stars</th>
+                <th data-sort="savedAt">Saved</th>
+              </tr>
+            </thead>
+            <tbody id="scores-body">
+              <tr><td colspan="6" class="empty">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 3: MAP ============ -->
+    <section class="tab-panel" data-tab-panel="map">
+      <div class="page">
+        <h2 class="page-title">Where Skye has flown</h2>
+        <p class="page-sub">States Skye has visited are painted sky-blue. Grey means no one has flown there yet.</p>
+        <div id="map-container" class="map-container"></div>
+        <div class="map-legend">
+          <span class="legend-swatch legend-generated"></span> Visited location
+          <span class="legend-swatch legend-empty"></span> Not visited yet
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 4: ABOUT ============ -->
+    <section class="tab-panel" data-tab-panel="about">
+      <div class="page page-narrow">
+        <h2 class="page-title">About this project</h2>
+
+        <h3>Project objective</h3>
+        <p>
+          AQI Typing Adventure teaches players about their state's 2023–2025 air
+          quality through a five-scene story narrated by Skye, a friendly pigeon.
+          Typing text is generated once per state via Claude Haiku 4.5, cached in
+          S3, and reused for every future player of that state — so each state
+          gets a consistent, grounded, kid-friendly telling of its own air
+          quality data.
+        </p>
+
+        <h3>How to use</h3>
+        <ol>
+          <li>Pick a state on the <strong>Play</strong> tab or hit <strong>Surprise me</strong>.</li>
+          <li>Read Scene 1 (Skye's intro), then type your way through Scenes 2–4.</li>
+          <li>Your WPM, accuracy, and time appear in the top-right as you type. Skye's location and your state's 2025 air-quality KPIs sit in the panel on the left.</li>
+          <li>Hit <strong>Submit score now</strong> any time to skip ahead to the score card — unfinished scenes are excluded from your average.</li>
+          <li>On the score card, save your score with a username to appear on the <strong>Scores</strong> board.</li>
+          <li>Visit <strong>Map</strong> to see which states Skye has visited.</li>
+        </ol>
+
+        <h3>Score calculation</h3>
+        <p>Each typing scene is scored on a 0–100 scale.</p>
+        <ul>
+          <li><strong>Per-scene score</strong> = 60% × accuracy + 40% × min(100, WPM).</li>
+          <li><strong>Total score</strong> = mean of the scenes you attempted. Skip a scene or submit early? It's excluded from the average — no penalty.</li>
+          <li><strong>Stars:</strong> &lt;55 = ★, 55–64 = ★★, 65–74 = ★★★, 75–84 = ★★★★, ≥85 = ★★★★★.</li>
+        </ul>
+        <p class="muted">Accuracy is weighted more than speed on purpose — Skye would rather you land clean than crash fast.</p>
+
+        <h3>Data source</h3>
+        <p class="citation">
+          US Environmental Protection Agency. Air Quality System Data Mart
+          [internet database] available via
+          https://www.epa.gov/outdoor-air-quality-data. Accessed May 09, 2026.
+          Pollutants: PM2.5 (param 88101), Ozone 8-hr max (param 44201). 2025
+          data may be preliminary.
+        </p>
+
+        <h3>Companion project</h3>
+        <p>
+          This app pulls <code>Monthly_aqi_by_state.csv</code> live from the
+          companion
+          <a href="https://github.com/kimthuynh/air_quality_analysis" target="_blank" rel="noopener">Air Quality Dashboard</a>
+          so upstream data refreshes propagate automatically without a redeploy.
+        </p>
+
+        <h3>Credits</h3>
+        <p class="muted">
+          Icon: placeholder outline (to be replaced with the "simplicity" outline
+          from
+          <a href="https://www.flaticon.com/free-icons/simplicity?word=simplicity&amp;shape=outline" target="_blank" rel="noopener">flaticon.com</a>).
+          Fonts: Inter, JetBrains Mono (Google Fonts). Map: D3.js + us-atlas TopoJSON.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js" defer></script>
+  <script src="/typing.js" defer></script>
+  <script src="/map.js" defer></script>
+  <script src="/app.js" defer></script>
+</body>
+</html>

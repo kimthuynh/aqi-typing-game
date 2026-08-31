@@ -1,0 +1,10 @@
+{
+  "Rules": [
+    {
+      "ID": "expire-scores-30d",
+      "Status": "Enabled",
+      "Filter": { "Prefix": "scores/" },
+      "Expiration": { "Days": 30 }
+    }
+  ]
+}
