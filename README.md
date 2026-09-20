@@ -26,8 +26,8 @@ vercel dev           # http://localhost:3000
 ANTHROPIC_API_KEY=...
 AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...
-AWS_REGION=us-west-1
-S3_BUCKET_NAME=amzn-s3-aqi-typing
+AWS_REGION= REGION
+S3_BUCKET_NAME= bucket name
 AQI_CSV_URL=https://raw.githubusercontent.com/kimthuynh/air_quality_analysis/main/app/data/Monthly_aqi_by_state.csv
 MOCK_MODE=true       # flip to false once you're ready to hit real Claude + S3
 ```
@@ -64,4 +64,9 @@ Accessed May 09, 2026. Pollutants: PM2.5 (param 88101), Ozone 8-hr max
 ## Missing assets (to be provided)
 
 - Real `scene4.png` (currently identical to `scene3.png`).
+
+
+## Built With
+
+* [Claude](https://anthropic.com) - Used as an AI coding assistant for prototyping, code optimization, and troubleshooting.
 

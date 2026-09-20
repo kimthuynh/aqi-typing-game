@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "public": true,
   "cleanUrls": true,
   "trailingSlash": false,
   "functions": {
@@ -11,12 +10,6 @@
   },
   "rewrites": [
     { "source": "/", "destination": "/public/index.html" },
-    { "source": "/index.html", "destination": "/public/index.html" },
-    { "source": "/styles.css", "destination": "/public/styles.css" },
-    { "source": "/app.js", "destination": "/public/app.js" },
-    { "source": "/typing.js", "destination": "/public/typing.js" },
-    { "source": "/map.js", "destination": "/public/map.js" },
-    { "source": "/icon.svg", "destination": "/public/icon.svg" },
-    { "source": "/images/(.*)", "destination": "/public/images/$1" }
+    { "source": "/:path((?!api/).*)", "destination": "/public/:path" }
   ]
 }
