@@ -1,3 +1,7 @@
+Dockerfile
+docs/app_objective_features.md
+
+
 # Node / Vercel
 node_modules/
 .vercel/
