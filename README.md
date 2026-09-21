@@ -33,11 +33,6 @@ AQI_CSV_URL=https://raw.githubusercontent.com/kimthuynh/air_quality_analysis/mai
 MOCK_MODE=true       # flip to false once you're ready to hit real Claude + S3
 ```
 
-=======
->>>>>>> 391a82758457de501bfbe00337e8fb3c4a5bc130
-With `MOCK_MODE=true`, `/api/get-story` returns the New York reference text
-(with the state name swapped in) — lets you test the full frontend/typing loop
-without spending API credits or writing to S3.
 
 ## Deploy (Vercel + GitHub)
 
@@ -63,10 +58,6 @@ US Environmental Protection Agency. Air Quality System Data Mart [internet
 database] available via https://www.epa.gov/outdoor-air-quality-data.
 Accessed May 09, 2026. Pollutants: PM2.5 (param 88101), Ozone 8-hr max
 (param 44201). 2025 data may be preliminary.
-
-## Missing assets (to be provided)
-
-- Real `scene4.png` (currently identical to `scene3.png`).
 
 
 ## Built With
